@@ -179,6 +179,8 @@ common:
     url: https://www.linkedin.com/company/ai21/
   - type: X
     url: https://x.com/AI21Labs
+  - type: LLMsTxt
+    url: https://docs.ai21.com/llms.txt
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
