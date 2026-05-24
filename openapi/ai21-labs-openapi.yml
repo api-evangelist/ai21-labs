@@ -1,0 +1,183 @@
+openapi: 3.1.0
+info:
+  title: AI21 Studio API
+  version: "1.0.0"
+  description: >-
+    REST API for AI21 Labs covering Jamba chat completions, AI21 Maestro
+    planning runs, and the managed File Library for RAG workflows.
+    Authentication is Bearer token via the Authorization header.
+  contact:
+    name: AI21 Labs
+    url: https://docs.ai21.com/
+servers:
+  - url: https://api.ai21.com
+    description: Production
+tags:
+  - name: Chat
+  - name: Maestro
+  - name: Library
+paths:
+  /studio/v1/chat/completions:
+    post:
+      tags: [Chat]
+      summary: Create a chat completion with a Jamba model
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [model, messages]
+              properties:
+                model:
+                  type: string
+                  description: jamba-large, jamba-mini, or other supported Jamba model identifier
+                messages:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      role:
+                        type: string
+                      content:
+                        type: string
+                max_tokens:
+                  type: integer
+                  maximum: 4096
+                temperature:
+                  type: number
+                  default: 0.4
+                top_p:
+                  type: number
+                  default: 1.0
+                tools:
+                  type: array
+                  items:
+                    type: object
+                documents:
+                  type: array
+                  items:
+                    type: object
+                response_format:
+                  type: object
+                stop:
+                  type: array
+                  items:
+                    type: string
+                n:
+                  type: integer
+                  minimum: 1
+                  maximum: 16
+                  default: 1
+                stream:
+                  type: boolean
+      responses:
+        "200":
+          description: Completion response
+  /studio/v1/maestro/runs:
+    post:
+      tags: [Maestro]
+      summary: Create a Maestro run
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  oneOf:
+                    - type: string
+                    - type: array
+                      items:
+                        type: object
+                system_prompt:
+                  type: string
+                requirements:
+                  type: array
+                  items:
+                    type: object
+                tools:
+                  type: array
+                  items:
+                    type: object
+                models:
+                  type: array
+                  items:
+                    type: string
+                budget:
+                  type: string
+                  enum: [low, medium, high]
+                include:
+                  type: array
+                  items:
+                    type: string
+                response_language:
+                  type: string
+      responses:
+        "200":
+          description: Run created
+  /studio/v1/maestro/runs/{run_id}:
+    get:
+      tags: [Maestro]
+      summary: Retrieve a Maestro run by ID
+      parameters:
+        - name: run_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Run object with status (completed, failed, in_progress)
+  /studio/v1/library/files:
+    get:
+      tags: [Library]
+      summary: List documents in the file library
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+        - name: status
+          in: query
+          schema:
+            type: string
+        - name: labels
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: File list
+    post:
+      tags: [Library]
+      summary: Upload a file to the library
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+                labels:
+                  type: array
+                  items:
+                    type: string
+                publicUrl:
+                  type: string
+      responses:
+        "200":
+          description: File uploaded; returns UUID
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer API key in Authorization header.
+security:
+  - BearerAuth: []
