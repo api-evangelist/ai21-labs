@@ -1,0 +1,347 @@
+asyncapi: 2.6.0
+id: urn:ai21-labs:studio:streaming
+info:
+  title: AI21 Studio Streaming API
+  version: 1.0.0
+  description: >-
+    AsyncAPI description of AI21 Labs' documented streaming surface. The AI21
+    Studio Jamba chat completions endpoint streams partial responses over
+    HTTP using Server-Sent Events (SSE) when the `stream` request parameter
+    is `true`. Each event delivers an incremental `delta` for the assistant
+    message; the stream terminates with the literal `[DONE]` event.
+
+    Only event flows that are explicitly described in the AI21 documentation
+    (https://docs.ai21.com) are modeled here. The Maestro and Conversational
+    RAG endpoints do not currently document an SSE streaming mode and are
+    therefore intentionally omitted.
+  contact:
+    name: AI21 Labs
+    url: https://docs.ai21.com
+  license:
+    name: Proprietary
+    url: https://www.ai21.com/terms-of-service/
+  termsOfService: https://www.ai21.com/terms-of-service/
+  tags:
+    - name: streaming
+      description: Server-Sent Events streaming surface
+    - name: jamba
+      description: Jamba family chat completions
+    - name: sse
+      description: HTTP + Server-Sent Events binding
+
+defaultContentType: text/event-stream
+
+servers:
+  studio:
+    url: https://api.ai21.com/studio/v1
+    protocol: https
+    description: AI21 Studio production base URL. SSE responses are delivered
+      over the same HTTPS endpoint as the standard REST API when `stream=true`.
+    security:
+      - bearerAuth: []
+    bindings:
+      http:
+        bindingVersion: '0.3.0'
+
+channels:
+  chat/completions:
+    description: >-
+      Jamba chat completions stream. Clients POST a chat completion request
+      with `stream: true` to `https://api.ai21.com/studio/v1/chat/completions`
+      and the server responds with a `text/event-stream` body. Each `data:`
+      line carries one JSON chunk; the final event is the literal string
+      `[DONE]`.
+    bindings:
+      http:
+        type: request
+        method: POST
+        bindingVersion: '0.3.0'
+    subscribe:
+      operationId: subscribeChatCompletionStream
+      summary: Receive streamed Jamba chat completion chunks
+      description: >-
+        Stream of Server-Sent Events emitted by the Jamba chat completions
+        endpoint when `stream=true`. The first chunk's `delta` contains
+        `{"role": "assistant"}`. Subsequent chunks contain `{"content": "<token>"}`
+        deltas. Only the final chunk includes a non-null `finish_reason` and a
+        populated `usage` object. After the final JSON chunk, the server emits
+        a terminator event whose data payload is the literal string `[DONE]`.
+      tags:
+        - name: streaming
+        - name: jamba
+        - name: sse
+      message:
+        oneOf:
+          - $ref: '#/components/messages/ChatCompletionChunk'
+          - $ref: '#/components/messages/ChatCompletionDone'
+    publish:
+      operationId: publishChatCompletionRequest
+      summary: Open a streamed Jamba chat completion
+      description: >-
+        Client request that opens the SSE stream. The request body is the
+        standard Jamba chat completions payload with `stream` set to `true`.
+        Per AI21 documentation, when `stream` is true, `n` must be `1` and
+        `tools` must not be set.
+      tags:
+        - name: streaming
+        - name: jamba
+      message:
+        $ref: '#/components/messages/ChatCompletionStreamRequest'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: >-
+        AI21 Studio API key passed as `Authorization: Bearer <your-api-key>`.
+
+  messages:
+    ChatCompletionStreamRequest:
+      name: ChatCompletionStreamRequest
+      title: Chat Completion Stream Request
+      summary: Open the SSE stream for a Jamba chat completion.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatCompletionRequest'
+      bindings:
+        http:
+          headers:
+            type: object
+            properties:
+              Authorization:
+                type: string
+                description: Bearer token header. Format `Bearer <api-key>`.
+              Content-Type:
+                type: string
+                const: application/json
+              Accept:
+                type: string
+                const: text/event-stream
+          bindingVersion: '0.3.0'
+
+    ChatCompletionChunk:
+      name: ChatCompletionChunk
+      title: Chat Completion Chunk
+      summary: One Server-Sent Event carrying a partial chat completion.
+      description: >-
+        Each SSE `data:` line contains a JSON-encoded chunk. The `id` field
+        matches the request id and is identical across all chunks for a
+        single request. The `choices` array contains a single element with a
+        `delta` payload describing the incremental message. The first chunk's
+        delta is `{"role": "assistant"}`; subsequent chunks contain
+        `{"content": "<token>"}`. `finish_reason` is present (non-null) only
+        in the final JSON chunk; `usage` is `null` until the final chunk,
+        which carries the full token accounting.
+      contentType: application/json
+      payload:
+        $ref: '#/components/schemas/ChatCompletionChunkObject'
+      examples:
+        - name: openingDelta
+          summary: First chunk announcing the assistant role
+          payload:
+            id: req_01HEXAMPLE
+            choices:
+              - index: 0
+                delta:
+                  role: assistant
+                finish_reason: null
+            usage: null
+        - name: contentDelta
+          summary: Mid-stream content token chunk
+          payload:
+            id: req_01HEXAMPLE
+            choices:
+              - index: 0
+                delta:
+                  content: Hello
+                finish_reason: null
+            usage: null
+        - name: finalChunk
+          summary: Final chunk with finish_reason and usage populated
+          payload:
+            id: req_01HEXAMPLE
+            choices:
+              - index: 0
+                delta: {}
+                finish_reason: stop
+            usage:
+              prompt_tokens: 24
+              completion_tokens: 17
+              total_tokens: 41
+
+    ChatCompletionDone:
+      name: ChatCompletionDone
+      title: Chat Completion Stream Terminator
+      summary: Stream terminator event.
+      description: >-
+        Final SSE event emitted by the server after the last JSON chunk. Its
+        `data:` line is the literal string `[DONE]` and signals that the
+        stream has ended. Clients must stop reading once this event is
+        received.
+      contentType: text/plain
+      payload:
+        type: string
+        const: '[DONE]'
+      examples:
+        - name: doneTerminator
+          summary: Stream terminator
+          payload: '[DONE]'
+
+  schemas:
+    ChatCompletionRequest:
+      type: object
+      required:
+        - model
+        - messages
+        - stream
+      properties:
+        model:
+          type: string
+          description: Name of the Jamba model to use (e.g. `jamba-mini`, `jamba-large`).
+        messages:
+          type: array
+          description: Conversation history. Each item is a message with `role` and `content`.
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        max_tokens:
+          type: integer
+          description: Maximum tokens the model may generate. Maximum 4096.
+          maximum: 4096
+        temperature:
+          type: number
+          format: float
+          description: Sampling temperature. Range 0.0-2.0.
+          default: 0.4
+          minimum: 0
+          maximum: 2
+        top_p:
+          type: number
+          format: float
+          description: Nucleus sampling cutoff. Range 0-1.0.
+          default: 1.0
+          minimum: 0
+          maximum: 1
+        stop:
+          type: array
+          description: Up to 64K characters per sequence; generation ends when any is produced.
+          items:
+            type: string
+        n:
+          type: integer
+          description: Number of completions to generate. Must be `1` when `stream` is true.
+          default: 1
+          minimum: 1
+          maximum: 16
+        stream:
+          type: boolean
+          description: When `true`, results are streamed token-by-token via Server-Sent Events.
+          const: true
+        response_format:
+          type: object
+          description: Optional output format. Use `{"type":"json_object"}` for JSON mode.
+          properties:
+            type:
+              type: string
+              enum:
+                - text
+                - json_object
+
+    ChatMessage:
+      type: object
+      required:
+        - role
+        - content
+      properties:
+        role:
+          type: string
+          enum:
+            - system
+            - user
+            - assistant
+            - tool
+        content:
+          type: string
+
+    ChatCompletionChunkObject:
+      type: object
+      description: >-
+        Schema of one streamed chat completion chunk. Matches AI21's
+        documented streaming response: an `id` identical across all chunks,
+        a single-element `choices` array carrying a progressive `delta`, and
+        a `usage` field that is `null` until the final chunk.
+      required:
+        - id
+        - choices
+      properties:
+        id:
+          type: string
+          description: Request id. Identical across every chunk of a single request.
+        choices:
+          type: array
+          minItems: 1
+          maxItems: 1
+          items:
+            $ref: '#/components/schemas/ChatCompletionChunkChoice'
+        usage:
+          oneOf:
+            - type: 'null'
+            - $ref: '#/components/schemas/Usage'
+          description: >-
+            `null` until the final chunk. The final chunk carries the full
+            token accounting (`prompt_tokens`, `completion_tokens`,
+            `total_tokens`).
+
+    ChatCompletionChunkChoice:
+      type: object
+      required:
+        - index
+        - delta
+      properties:
+        index:
+          type: integer
+          description: Always `0` in streaming responses.
+          const: 0
+        delta:
+          $ref: '#/components/schemas/ChatCompletionDelta'
+        finish_reason:
+          description: >-
+            Present (non-null) only on the final chunk. `stop` indicates a
+            natural completion; `length` indicates `max_tokens` was reached.
+          oneOf:
+            - type: 'null'
+            - type: string
+              enum:
+                - stop
+                - length
+
+    ChatCompletionDelta:
+      type: object
+      description: >-
+        Incremental message fragment. The first chunk's delta is
+        `{"role": "assistant"}`. Subsequent chunks contain a `content` token.
+        The final chunk's delta may be empty.
+      properties:
+        role:
+          type: string
+          enum:
+            - assistant
+        content:
+          type: string
+
+    Usage:
+      type: object
+      required:
+        - prompt_tokens
+        - completion_tokens
+        - total_tokens
+      properties:
+        prompt_tokens:
+          type: integer
+          description: Count of input tokens.
+        completion_tokens:
+          type: integer
+          description: Count of output tokens.
+        total_tokens:
+          type: integer
+          description: Sum of prompt and completion tokens.

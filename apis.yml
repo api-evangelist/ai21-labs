@@ -28,7 +28,7 @@ tags:
   - Fine-Tuning
 url: https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/apis.yml
 created: '2026-05-23'
-modified: '2026-05-23'
+modified: '2026-05-29'
 specificationVersion: '0.20'
 apis:
   - aid: ai21-labs:chat-completions
@@ -48,6 +48,8 @@ apis:
     properties:
       - type: Documentation
         url: https://docs.ai21.com/reference
+      - type: AsyncAPI
+        url: https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/asyncapi/ai21-labs-asyncapi.yml
   - aid: ai21-labs:maestro
     name: AI21 Maestro API
     description: >-
