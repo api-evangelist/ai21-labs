@@ -1,0 +1,681 @@
+# AI21 Labs Conceptual GraphQL Schema
+# Maps the AI21 Studio REST API surface to GraphQL types.
+# Reference: https://docs.ai21.com/reference
+
+# ---------------------------------------------------------------------------
+# Scalars
+# ---------------------------------------------------------------------------
+
+scalar DateTime
+scalar JSON
+
+# ---------------------------------------------------------------------------
+# Enums
+# ---------------------------------------------------------------------------
+
+enum FinishReason {
+  STOP
+  LENGTH
+  TOOL_CALLS
+  CONTENT_FILTER
+  NULL
+}
+
+enum TaskType {
+  SUMMARIZE
+  SHORT_SUMMARY
+  KEYWORDS
+  HEADLINE
+  DOCUMENT
+  MEETING_TRANSCRIPT
+}
+
+enum SourceType {
+  TEXT
+  URL
+}
+
+enum SummaryLength {
+  SHORT
+  MEDIUM
+  LONG
+}
+
+enum ParaphraseStyle {
+  GENERAL
+  FORMAL
+  CASUAL
+  SHORT
+  LONG
+}
+
+enum SegmentationType {
+  PARAGRAPH
+  SENTENCE
+  TOPIC
+}
+
+enum BatchStatus {
+  CREATED
+  RUNNING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum FineTuneStatus {
+  PENDING
+  TRAINING
+  COMPLETED
+  FAILED
+  CANCELLED
+}
+
+enum FineTuneStrategy {
+  FULL
+  LORA
+  QLORA
+}
+
+enum MaestroRunStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  FAILED
+}
+
+enum ToolType {
+  FUNCTION
+  RAG
+  WEB_SEARCH
+  MCP
+  HTTP
+}
+
+# ---------------------------------------------------------------------------
+# Model & Capabilities
+# ---------------------------------------------------------------------------
+
+type ContextWindow {
+  maxInputTokens: Int!
+  maxOutputTokens: Int!
+  totalTokens: Int!
+}
+
+type ModelCapabilities {
+  chat: Boolean!
+  streaming: Boolean!
+  toolCalling: Boolean!
+  systemPrompt: Boolean!
+  fineTuning: Boolean!
+  batchInference: Boolean!
+  jsonMode: Boolean!
+  ragGrounding: Boolean!
+}
+
+type ModelDetails {
+  id: ID!
+  name: String!
+  version: String
+  family: String
+  contextWindow: ContextWindow!
+  capabilities: ModelCapabilities!
+  createdAt: DateTime
+  isOpenWeight: Boolean!
+  huggingFaceUrl: String
+}
+
+type Model {
+  id: ID!
+  details: ModelDetails!
+  description: String
+  pricing: JSON
+}
+
+type JambaInstruct {
+  modelId: ID!
+  modelName: String!
+  architecture: String!
+  parameterCount: String
+  contextWindow: ContextWindow!
+  capabilities: ModelCapabilities!
+}
+
+# ---------------------------------------------------------------------------
+# Token & Log Probability
+# ---------------------------------------------------------------------------
+
+type TokenData {
+  token: String!
+  logprob: Float
+  bytes: [Int]
+}
+
+type TokenTopK {
+  topTokens: [TokenData!]
+}
+
+type LogProb {
+  token: String!
+  logprob: Float!
+  topLogprobs: [TokenTopK]
+}
+
+type TokenCount {
+  promptTokens: Int!
+  completionTokens: Int!
+  totalTokens: Int!
+}
+
+# ---------------------------------------------------------------------------
+# Text Segments & Completions
+# ---------------------------------------------------------------------------
+
+type TextSegment {
+  text: String!
+  startIndex: Int
+  endIndex: Int
+}
+
+type Prompt {
+  text: String!
+  tokens: [TokenData]
+}
+
+type Completion {
+  text: String!
+  finishReason: FinishReason
+  logprobs: [LogProb]
+}
+
+type CompletionRequest {
+  model: String!
+  prompt: String!
+  maxTokens: Int
+  temperature: Float
+  topP: Float
+  stopSequences: [String]
+  numResults: Int
+  frequencyPenalty: Float
+  presencePenalty: Float
+  countPenalty: Float
+}
+
+type CompletionResult {
+  id: ID!
+  completions: [Completion!]!
+  prompt: Prompt
+  usage: TokenCount
+}
+
+# ---------------------------------------------------------------------------
+# Chat Messages
+# ---------------------------------------------------------------------------
+
+type SystemPrompt {
+  content: String!
+}
+
+type UserMessage {
+  role: String!
+  content: String!
+}
+
+type AssistantMessage {
+  role: String!
+  content: String
+  toolCalls: [ToolCall]
+}
+
+type ChatMessage {
+  role: String!
+  content: String
+  name: String
+  toolCallId: String
+  toolCalls: [ToolCall]
+}
+
+type ChatChoice {
+  index: Int!
+  message: AssistantMessage!
+  finishReason: FinishReason
+  logprobs: JSON
+}
+
+type ChatUsage {
+  promptTokens: Int!
+  completionTokens: Int!
+  totalTokens: Int!
+}
+
+type ChatCompletion {
+  id: ID!
+  model: String!
+  choices: [ChatChoice!]!
+  usage: ChatUsage!
+  created: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Tool Calling
+# ---------------------------------------------------------------------------
+
+type JSONSchemaObject {
+  type: String!
+  properties: JSON
+  required: [String]
+  description: String
+}
+
+type FunctionDef {
+  name: String!
+  description: String
+  parameters: JSONSchemaObject
+}
+
+type Tool {
+  type: ToolType!
+  function: FunctionDef
+}
+
+type ToolCall {
+  id: ID!
+  type: String!
+  function: FunctionCallInvocation
+}
+
+type FunctionCallInvocation {
+  name: String!
+  arguments: String!
+}
+
+type ToolResult {
+  toolCallId: ID!
+  role: String!
+  content: String!
+}
+
+# ---------------------------------------------------------------------------
+# Summarization
+# ---------------------------------------------------------------------------
+
+type SummarizeRequest {
+  source: String!
+  sourceType: SourceType!
+  taskType: TaskType!
+  summaryLength: SummaryLength
+  outputFormat: String
+  modelId: String
+}
+
+type Summary {
+  text: String!
+}
+
+type SummarizeResult {
+  id: ID!
+  summary: Summary!
+  usage: TokenCount
+}
+
+type Summarize {
+  request: SummarizeRequest!
+  result: SummarizeResult
+}
+
+# ---------------------------------------------------------------------------
+# Paraphrase
+# ---------------------------------------------------------------------------
+
+type ParaphraseOptions {
+  style: ParaphraseStyle!
+  numberOfSuggestions: Int
+  startIndex: Int
+  endIndex: Int
+}
+
+type ParaphraseRequest {
+  text: String!
+  options: ParaphraseOptions
+  modelId: String
+}
+
+type ParaphraseResult {
+  id: ID!
+  suggestions: [TextSegment!]!
+  usage: TokenCount
+}
+
+type Paraphrase {
+  request: ParaphraseRequest!
+  result: ParaphraseResult
+}
+
+# ---------------------------------------------------------------------------
+# Grammar & Text Improvements
+# ---------------------------------------------------------------------------
+
+type Improvement {
+  suggestion: String!
+  startIndex: Int!
+  endIndex: Int!
+  originalText: String!
+  improvementType: String
+}
+
+type GrammarRequest {
+  text: String!
+  modelId: String
+}
+
+type GrammarResult {
+  id: ID!
+  corrections: [Improvement!]!
+  usage: TokenCount
+}
+
+type GrammarCorrection {
+  request: GrammarRequest!
+  result: GrammarResult
+}
+
+type TextImprovements {
+  id: ID!
+  improvements: [Improvement!]!
+  improvedText: String
+  usage: TokenCount
+}
+
+# ---------------------------------------------------------------------------
+# Embeddings
+# ---------------------------------------------------------------------------
+
+type EmbeddingData {
+  index: Int!
+  embedding: [Float!]!
+  text: String
+}
+
+type EmbeddingRequest {
+  texts: [String!]!
+  modelId: String
+  type: String
+}
+
+type EmbeddingResult {
+  id: ID!
+  results: [EmbeddingData!]!
+  usage: TokenCount
+}
+
+type Embedding {
+  request: EmbeddingRequest!
+  result: EmbeddingResult
+}
+
+# ---------------------------------------------------------------------------
+# Text Segmentation
+# ---------------------------------------------------------------------------
+
+type Segmentation {
+  segmentText: String!
+  segmentType: SegmentationType!
+  startIndex: Int
+  endIndex: Int
+}
+
+type TextSegmentations {
+  id: ID!
+  segmentType: SegmentationType!
+  segments: [Segmentation!]!
+  usage: TokenCount
+}
+
+# ---------------------------------------------------------------------------
+# RAG & Document Library
+# ---------------------------------------------------------------------------
+
+type Document {
+  id: ID!
+  name: String!
+  fileType: String
+  sizeBytes: Int
+  status: String
+  labels: [String]
+  createdAt: DateTime
+  updatedAt: DateTime
+}
+
+type DocumentResult {
+  document: Document!
+  relevanceScore: Float
+  excerpt: String
+}
+
+type RAGEngine {
+  id: ID!
+  name: String
+  documents: [Document]
+  totalDocuments: Int
+}
+
+# ---------------------------------------------------------------------------
+# Batch Processing
+# ---------------------------------------------------------------------------
+
+type BatchRequest {
+  customId: String!
+  method: String!
+  url: String!
+  body: JSON
+}
+
+type BatchResult {
+  customId: String!
+  response: JSON
+  error: String
+}
+
+type BatchJob {
+  id: ID!
+  status: BatchStatus!
+  model: String!
+  requests: [BatchRequest]
+  results: [BatchResult]
+  inputFileId: String
+  outputFileId: String
+  completionWindow: String
+  requestCounts: JSON
+  createdAt: DateTime
+  completedAt: DateTime
+  expiresAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Fine-Tuning
+# ---------------------------------------------------------------------------
+
+type FineTuneDataset {
+  id: ID!
+  name: String!
+  fileId: String
+  numExamples: Int
+  status: String
+  createdAt: DateTime
+}
+
+type FineTuneJob {
+  id: ID!
+  baseModel: String!
+  fineTunedModelId: String
+  strategy: FineTuneStrategy!
+  status: FineTuneStatus!
+  dataset: FineTuneDataset
+  hyperparameters: JSON
+  trainedTokens: Int
+  createdAt: DateTime
+  completedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Maestro
+# ---------------------------------------------------------------------------
+
+type MaestroTool {
+  type: ToolType!
+  name: String
+  description: String
+  configuration: JSON
+}
+
+type MaestroConfig {
+  tools: [MaestroTool]
+  validatedOutput: Boolean
+  maxSteps: Int
+  context: JSON
+}
+
+type MaestroRun {
+  id: ID!
+  status: MaestroRunStatus!
+  model: String!
+  messages: [ChatMessage!]!
+  config: MaestroConfig
+  output: AssistantMessage
+  usage: ChatUsage
+  steps: JSON
+  createdAt: DateTime
+  completedAt: DateTime
+}
+
+# ---------------------------------------------------------------------------
+# Platform
+# ---------------------------------------------------------------------------
+
+type APIKey {
+  id: ID!
+  name: String!
+  createdAt: DateTime!
+  lastUsedAt: DateTime
+  prefix: String
+}
+
+type UsageStat {
+  date: String!
+  model: String
+  promptTokens: Int!
+  completionTokens: Int!
+  totalTokens: Int!
+  requestCount: Int!
+  costUsd: Float
+}
+
+# ---------------------------------------------------------------------------
+# Query & Mutation
+# ---------------------------------------------------------------------------
+
+type Query {
+  # Models
+  models: [Model!]!
+  model(id: ID!): Model
+
+  # Chat Completions
+  chatCompletion(
+    model: String!
+    messages: [JSON!]!
+    maxTokens: Int
+    temperature: Float
+    topP: Float
+    tools: [JSON]
+    stream: Boolean
+  ): ChatCompletion
+
+  # Summarization
+  summarize(
+    source: String!
+    sourceType: SourceType!
+    taskType: TaskType!
+    summaryLength: SummaryLength
+  ): SummarizeResult
+
+  # Paraphrase
+  paraphrase(
+    text: String!
+    style: ParaphraseStyle
+    numberOfSuggestions: Int
+  ): ParaphraseResult
+
+  # Grammar
+  grammarCheck(text: String!): GrammarResult
+
+  # Text Improvements
+  textImprovements(text: String!, improvementTypes: [String]): TextImprovements
+
+  # Embeddings
+  embeddings(texts: [String!]!, modelId: String): EmbeddingResult
+
+  # Segmentation
+  segmentText(text: String!, segmentType: SegmentationType): TextSegmentations
+
+  # RAG / File Library
+  documents: [Document!]!
+  document(id: ID!): Document
+
+  # Batch
+  batchJobs: [BatchJob!]!
+  batchJob(id: ID!): BatchJob
+
+  # Fine-Tuning
+  fineTuneJobs: [FineTuneJob!]!
+  fineTuneJob(id: ID!): FineTuneJob
+
+  # Maestro
+  maestroRun(id: ID!): MaestroRun
+
+  # Platform
+  apiKeys: [APIKey!]!
+  usageStats(startDate: String, endDate: String, model: String): [UsageStat!]!
+}
+
+type Mutation {
+  # Chat
+  createChatCompletion(
+    model: String!
+    messages: [JSON!]!
+    maxTokens: Int
+    temperature: Float
+    topP: Float
+    tools: [JSON]
+    stream: Boolean
+  ): ChatCompletion
+
+  # Documents
+  uploadDocument(name: String!, content: String!, fileType: String, labels: [String]): Document
+  deleteDocument(id: ID!): Boolean
+  updateDocument(id: ID!, name: String, labels: [String]): Document
+
+  # Batch
+  createBatchJob(model: String!, requests: [JSON!]!, completionWindow: String): BatchJob
+  cancelBatchJob(id: ID!): BatchJob
+
+  # Fine-Tuning
+  createFineTuneJob(
+    baseModel: String!
+    datasetId: String!
+    strategy: FineTuneStrategy!
+    hyperparameters: JSON
+  ): FineTuneJob
+  cancelFineTuneJob(id: ID!): FineTuneJob
+
+  # Maestro
+  createMaestroRun(
+    model: String!
+    messages: [JSON!]!
+    tools: [JSON]
+    validatedOutput: Boolean
+  ): MaestroRun
+
+  # Platform
+  createAPIKey(name: String!): APIKey
+  deleteAPIKey(id: ID!): Boolean
+}

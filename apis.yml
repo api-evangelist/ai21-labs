@@ -1,188 +1,178 @@
 aid: ai21-labs
 name: AI21 Labs
-description: >-
-  AI21 Labs is an enterprise foundation-model company best known for the Jamba
-  family of open-weight hybrid Mamba/Transformer models and AI21 Maestro, a
-  dynamic planning system that orchestrates tools, retrieval, and validated
-  output during inference. The platform exposes a Bearer-token REST API at
-  api.ai21.com covering chat completions, conversational RAG over a managed file
-  library, batch processing, fine-tuning, and function calling. Official Python
-  and TypeScript SDKs wrap the API with sync and async clients and integrate
-  natively into LangChain and LlamaIndex. Jamba weights are also published on
-  Hugging Face for self-hosted vLLM deployment.
+description: AI21 Labs is an enterprise foundation-model company best known for the
+  Jamba family of open-weight hybrid Mamba/Transformer models and AI21 Maestro, a
+  dynamic planning system that orchestrates tools, retrieval, and validated output
+  during inference. The platform exposes a Bearer-token REST API at api.ai21.com covering
+  chat completions, conversational RAG over a managed file library, batch processing,
+  fine-tuning, and function calling. Official Python and TypeScript SDKs wrap the
+  API with sync and async clients and integrate natively into LangChain and LlamaIndex.
+  Jamba weights are also published on Hugging Face for self-hosted vLLM deployment.
 type: Index
 position: Provider
 access: 3rd-Party
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - AI
-  - Foundation Models
-  - LLM
-  - Jamba
-  - Mamba
-  - RAG
-  - Agents
-  - Maestro
-  - Inference
-  - Enterprise AI
-  - Fine-Tuning
+- AI
+- Foundation Models
+- LLM
+- Jamba
+- Mamba
+- RAG
+- Agents
+- Maestro
+- Inference
+- Enterprise AI
+- Fine-Tuning
 url: https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-05-29'
 specificationVersion: '0.20'
 apis:
-  - aid: ai21-labs:chat-completions
-    name: AI21 Jamba Chat Completions API
-    description: >-
-      Conversational completions endpoint backed by the Jamba family of hybrid
-      Mamba/Transformer models (Jamba 1.5 Mini, Jamba 1.5 Large, Jamba 1.6).
-      Accepts a message array, system prompts, temperature, max tokens, tools,
-      and streaming, returning assistant messages with usage metadata.
-    humanURL: https://docs.ai21.com/reference
-    baseURL: https://api.ai21.com/studio/v1
-    tags:
-      - Chat
-      - Completions
-      - Jamba
-      - LLM
-    properties:
-      - type: Documentation
-        url: https://docs.ai21.com/reference
-      - type: AsyncAPI
-        url: https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/asyncapi/ai21-labs-asyncapi.yml
-  - aid: ai21-labs:maestro
-    name: AI21 Maestro API
-    description: >-
-      Dynamic planning system that, at inference time, determines the optimal
-      sequence of actions to solve a task. Exposes run creation and retrieval
-      endpoints, supports validated output for strict instruction following,
-      and orchestrates RAG, web search, file libraries, MCP tools, and custom
-      HTTP tools.
-    humanURL: https://docs.ai21.com/docs/maestro
-    baseURL: https://api.ai21.com/studio/v1
-    tags:
-      - Maestro
-      - Planning
-      - Agents
-      - Validated Output
-    properties:
-      - type: Documentation
-        url: https://docs.ai21.com/docs/maestro
-  - aid: ai21-labs:library
-    name: AI21 File Library API
-    description: >-
-      Managed file storage for RAG workflows. Upload, list, retrieve, update,
-      and delete documents that Maestro and Jamba endpoints can ground on at
-      inference time.
-    humanURL: https://docs.ai21.com/reference
-    baseURL: https://api.ai21.com/studio/v1
-    tags:
-      - Files
-      - RAG
-      - Library
-      - Documents
-    properties:
-      - type: Documentation
-        url: https://docs.ai21.com/reference
-  - aid: ai21-labs:batch
-    name: AI21 Batch API
-    description: >-
-      Asynchronous batch processing for large volumes of Jamba completions.
-      Submit a batch job, poll for status, and download results when the run
-      completes.
-    humanURL: https://docs.ai21.com/reference
-    baseURL: https://api.ai21.com/studio/v1
-    tags:
-      - Batch
-      - Async
-      - Inference
-    properties:
-      - type: Documentation
-        url: https://docs.ai21.com/reference
-  - aid: ai21-labs:fine-tuning
-    name: AI21 Fine-Tuning API
-    description: >-
-      Fine-tuning service for Jamba models supporting full, LoRA, and QLoRA
-      strategies. Create training jobs from uploaded datasets and deploy the
-      resulting model variants behind the standard chat completions endpoint.
-    humanURL: https://docs.ai21.com/docs/fine-tuning
-    baseURL: https://api.ai21.com/studio/v1
-    tags:
-      - Fine-Tuning
-      - LoRA
-      - QLoRA
-      - Training
-    properties:
-      - type: Documentation
-        url: https://docs.ai21.com/docs/fine-tuning
-  - aid: ai21-labs:python-sdk
-    name: AI21 Python SDK
-    description: >-
-      Official Python SDK (ai21 on PyPI) wrapping the AI21 Studio REST API with
-      sync and async clients, streaming support, LangChain / LlamaIndex
-      integrations, and helpers for chat, Maestro, library, and batch.
-    humanURL: https://github.com/AI21Labs/ai21-python
-    baseURL: https://github.com/AI21Labs/ai21-python
-    tags:
-      - SDK
-      - Python
-      - PyPI
-    properties:
-      - type: Repository
-        url: https://github.com/AI21Labs/ai21-python
-  - aid: ai21-labs:typescript-sdk
-    name: AI21 TypeScript / JavaScript SDK
-    description: >-
-      Official TypeScript and JavaScript client for the AI21 Studio API, with
-      typed request and response models and streaming helpers for browser and
-      Node.js runtimes.
-    humanURL: https://github.com/AI21Labs/ai21-typescript
-    baseURL: https://github.com/AI21Labs/ai21-typescript
-    tags:
-      - SDK
-      - TypeScript
-      - JavaScript
-    properties:
-      - type: Repository
-        url: https://github.com/AI21Labs
-  - aid: ai21-labs:huggingface
-    name: AI21 Jamba on Hugging Face
-    description: >-
-      Open-weight releases of the Jamba family on Hugging Face for self-hosted
-      inference via vLLM, Transformers, and other runtimes.
-    humanURL: https://huggingface.co/ai21labs
-    baseURL: https://huggingface.co/ai21labs
-    tags:
-      - Hugging Face
-      - Open Weights
-      - Jamba
-      - Self-Hosted
-    properties:
-      - type: Repository
-        url: https://huggingface.co/ai21labs
-common:
-  - type: Website
-    url: https://www.ai21.com/
+- aid: ai21-labs:chat-completions
+  name: AI21 Jamba Chat Completions API
+  description: Conversational completions endpoint backed by the Jamba family of hybrid
+    Mamba/Transformer models (Jamba 1.5 Mini, Jamba 1.5 Large, Jamba 1.6). Accepts
+    a message array, system prompts, temperature, max tokens, tools, and streaming,
+    returning assistant messages with usage metadata.
+  humanURL: https://docs.ai21.com/reference
+  baseURL: https://api.ai21.com/studio/v1
+  tags:
+  - Chat
+  - Completions
+  - Jamba
+  - LLM
+  properties:
   - type: Documentation
-    url: https://docs.ai21.com/
-  - type: APIReference
     url: https://docs.ai21.com/reference
-  - type: GitHubOrganization
+  - type: AsyncAPI
+    url: https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/asyncapi/ai21-labs-asyncapi.yml
+  - url: graphql/ai21-labs-graphql.md
+    type: GraphQL
+- aid: ai21-labs:maestro
+  name: AI21 Maestro API
+  description: Dynamic planning system that, at inference time, determines the optimal
+    sequence of actions to solve a task. Exposes run creation and retrieval endpoints,
+    supports validated output for strict instruction following, and orchestrates RAG,
+    web search, file libraries, MCP tools, and custom HTTP tools.
+  humanURL: https://docs.ai21.com/docs/maestro
+  baseURL: https://api.ai21.com/studio/v1
+  tags:
+  - Maestro
+  - Planning
+  - Agents
+  - Validated Output
+  properties:
+  - type: Documentation
+    url: https://docs.ai21.com/docs/maestro
+- aid: ai21-labs:library
+  name: AI21 File Library API
+  description: Managed file storage for RAG workflows. Upload, list, retrieve, update,
+    and delete documents that Maestro and Jamba endpoints can ground on at inference
+    time.
+  humanURL: https://docs.ai21.com/reference
+  baseURL: https://api.ai21.com/studio/v1
+  tags:
+  - Files
+  - RAG
+  - Library
+  - Documents
+  properties:
+  - type: Documentation
+    url: https://docs.ai21.com/reference
+- aid: ai21-labs:batch
+  name: AI21 Batch API
+  description: Asynchronous batch processing for large volumes of Jamba completions.
+    Submit a batch job, poll for status, and download results when the run completes.
+  humanURL: https://docs.ai21.com/reference
+  baseURL: https://api.ai21.com/studio/v1
+  tags:
+  - Batch
+  - Async
+  - Inference
+  properties:
+  - type: Documentation
+    url: https://docs.ai21.com/reference
+- aid: ai21-labs:fine-tuning
+  name: AI21 Fine-Tuning API
+  description: Fine-tuning service for Jamba models supporting full, LoRA, and QLoRA
+    strategies. Create training jobs from uploaded datasets and deploy the resulting
+    model variants behind the standard chat completions endpoint.
+  humanURL: https://docs.ai21.com/docs/fine-tuning
+  baseURL: https://api.ai21.com/studio/v1
+  tags:
+  - Fine-Tuning
+  - LoRA
+  - QLoRA
+  - Training
+  properties:
+  - type: Documentation
+    url: https://docs.ai21.com/docs/fine-tuning
+- aid: ai21-labs:python-sdk
+  name: AI21 Python SDK
+  description: Official Python SDK (ai21 on PyPI) wrapping the AI21 Studio REST API
+    with sync and async clients, streaming support, LangChain / LlamaIndex integrations,
+    and helpers for chat, Maestro, library, and batch.
+  humanURL: https://github.com/AI21Labs/ai21-python
+  baseURL: https://github.com/AI21Labs/ai21-python
+  tags:
+  - SDK
+  - Python
+  - PyPI
+  properties:
+  - type: Repository
+    url: https://github.com/AI21Labs/ai21-python
+- aid: ai21-labs:typescript-sdk
+  name: AI21 TypeScript / JavaScript SDK
+  description: Official TypeScript and JavaScript client for the AI21 Studio API,
+    with typed request and response models and streaming helpers for browser and Node.js
+    runtimes.
+  humanURL: https://github.com/AI21Labs/ai21-typescript
+  baseURL: https://github.com/AI21Labs/ai21-typescript
+  tags:
+  - SDK
+  - TypeScript
+  - JavaScript
+  properties:
+  - type: Repository
     url: https://github.com/AI21Labs
-  - type: HuggingFace
+- aid: ai21-labs:huggingface
+  name: AI21 Jamba on Hugging Face
+  description: Open-weight releases of the Jamba family on Hugging Face for self-hosted
+    inference via vLLM, Transformers, and other runtimes.
+  humanURL: https://huggingface.co/ai21labs
+  baseURL: https://huggingface.co/ai21labs
+  tags:
+  - Hugging Face
+  - Open Weights
+  - Jamba
+  - Self-Hosted
+  properties:
+  - type: Repository
     url: https://huggingface.co/ai21labs
-  - type: Blog
-    url: https://www.ai21.com/blog/
-  - type: Pricing
-    url: https://www.ai21.com/pricing/
-  - type: ChangeLog
-    url: https://docs.ai21.com/changelog
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/ai21/
-  - type: X
-    url: https://x.com/AI21Labs
-  - type: LLMsTxt
-    url: https://docs.ai21.com/llms.txt
+common:
+- type: Website
+  url: https://www.ai21.com/
+- type: Documentation
+  url: https://docs.ai21.com/
+- type: APIReference
+  url: https://docs.ai21.com/reference
+- type: GitHubOrganization
+  url: https://github.com/AI21Labs
+- type: HuggingFace
+  url: https://huggingface.co/ai21labs
+- type: Blog
+  url: https://www.ai21.com/blog/
+- type: Pricing
+  url: https://www.ai21.com/pricing/
+- type: ChangeLog
+  url: https://docs.ai21.com/changelog
+- type: LinkedIn
+  url: https://www.linkedin.com/company/ai21/
+- type: X
+  url: https://x.com/AI21Labs
+- type: LLMsTxt
+  url: https://docs.ai21.com/llms.txt
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
