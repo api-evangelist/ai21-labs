@@ -151,6 +151,10 @@ apis:
   - type: Repository
     url: https://huggingface.co/ai21labs
 common:
+- type: DomainSecurity
+  url: security/ai21-labs-domain-security.yml
+- type: Authentication
+  url: authentication/ai21-labs-authentication.yml
 - type: Website
   url: https://www.ai21.com/
 - type: Documentation
