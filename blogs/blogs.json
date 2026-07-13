@@ -2,13 +2,14 @@
   "repo": "ai21-labs",
   "feeds": [
     {
-      "source": "https://www.ai21.com/blog/",
-      "feed_url": "",
-      "saved": 2,
-      "method": "agent-scrape"
+      "source": "https://huggingface.co/ai21labs",
+      "feed_url": "https://huggingface.co/ai21labs",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 3,
-  "fetched": "2026-06-27T12:21:01Z",
+  "fetched": "2026-07-11T11:50:51Z",
   "agent_pulled": "2026-06-27"
 }
