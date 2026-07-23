@@ -1,0 +1,83 @@
+openapi: 3.1.0
+info:
+  title: AI21 Studio Chat Maestro API
+  version: 1.0.0
+  description: REST API for AI21 Labs covering Jamba chat completions, AI21 Maestro planning runs, and the managed File Library for RAG workflows. Authentication is Bearer token via the Authorization header.
+  contact:
+    name: AI21 Labs
+    url: https://docs.ai21.com/
+servers:
+- url: https://api.ai21.com
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Maestro
+paths:
+  /studio/v1/maestro/runs:
+    post:
+      tags:
+      - Maestro
+      summary: Create a Maestro run
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                input:
+                  oneOf:
+                  - type: string
+                  - type: array
+                    items:
+                      type: object
+                system_prompt:
+                  type: string
+                requirements:
+                  type: array
+                  items:
+                    type: object
+                tools:
+                  type: array
+                  items:
+                    type: object
+                models:
+                  type: array
+                  items:
+                    type: string
+                budget:
+                  type: string
+                  enum:
+                  - low
+                  - medium
+                  - high
+                include:
+                  type: array
+                  items:
+                    type: string
+                response_language:
+                  type: string
+      responses:
+        '200':
+          description: Run created
+  /studio/v1/maestro/runs/{run_id}:
+    get:
+      tags:
+      - Maestro
+      summary: Retrieve a Maestro run by ID
+      parameters:
+      - name: run_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Run object with status (completed, failed, in_progress)
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer API key in Authorization header.

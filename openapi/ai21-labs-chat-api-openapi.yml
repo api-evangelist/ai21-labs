@@ -1,0 +1,82 @@
+openapi: 3.1.0
+info:
+  title: AI21 Studio Chat API
+  version: 1.0.0
+  description: REST API for AI21 Labs covering Jamba chat completions, AI21 Maestro planning runs, and the managed File Library for RAG workflows. Authentication is Bearer token via the Authorization header.
+  contact:
+    name: AI21 Labs
+    url: https://docs.ai21.com/
+servers:
+- url: https://api.ai21.com
+  description: Production
+security:
+- BearerAuth: []
+tags:
+- name: Chat
+paths:
+  /studio/v1/chat/completions:
+    post:
+      tags:
+      - Chat
+      summary: Create a chat completion with a Jamba model
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - model
+              - messages
+              properties:
+                model:
+                  type: string
+                  description: jamba-large, jamba-mini, or other supported Jamba model identifier
+                messages:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      role:
+                        type: string
+                      content:
+                        type: string
+                max_tokens:
+                  type: integer
+                  maximum: 4096
+                temperature:
+                  type: number
+                  default: 0.4
+                top_p:
+                  type: number
+                  default: 1.0
+                tools:
+                  type: array
+                  items:
+                    type: object
+                documents:
+                  type: array
+                  items:
+                    type: object
+                response_format:
+                  type: object
+                stop:
+                  type: array
+                  items:
+                    type: string
+                n:
+                  type: integer
+                  minimum: 1
+                  maximum: 16
+                  default: 1
+                stream:
+                  type: boolean
+      responses:
+        '200':
+          description: Completion response
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Bearer API key in Authorization header.
