@@ -1,0 +1,18 @@
+{
+  "provider": "ai21-labs",
+  "sources": [
+    "ai21-labs-chat-api-openapi.yml",
+    "ai21-labs-library-api-openapi.yml",
+    "ai21-labs-maestro-api-openapi.yml"
+  ],
+  "outputs": [
+    "ai21-labs-chat-api-openapi.yml",
+    "ai21-labs-library-api-openapi.yml",
+    "ai21-labs-maestro-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
