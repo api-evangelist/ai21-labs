@@ -199,6 +199,15 @@ apis:
   - type: OpenAPI
     url: openapi/ai21-labs-maestro-api-openapi.yml
 common:
+- type: IssueTracker
+  url: https://github.com/AI21Labs/ai21-python/issues
+- type: Releases
+  url: https://github.com/AI21Labs/ai21-python/releases
+- type: ContributionGuide
+  url: https://github.com/AI21Labs/ai21-python/blob/main/CONTRIBUTING.md
+- type: License
+  name: Apache-2.0
+  url: https://github.com/AI21Labs/ai21-python/blob/main/LICENSE
 - type: AgenticAccess
   url: agentic-access/ai21-labs-agentic-access.yml
 - type: DomainSecurity
