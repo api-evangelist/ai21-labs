@@ -40,7 +40,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/apis.yml
 created: '2026-05-23'
 modified: '2026-05-29'
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 apis:
 - aid: ai21-labs:chat-completions
   name: AI21 Jamba Chat Completions API
