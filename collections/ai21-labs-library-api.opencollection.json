@@ -1,0 +1,83 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "AI21 Studio Chat Library API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Library",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List documents in the file library",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.ai21.com/studio/v1/library/files",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "labels",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "List documents in the file library"
+        },
+        {
+          "info": {
+            "name": "Upload a file to the library",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.ai21.com/studio/v1/library/files",
+            "body": {
+              "type": "multipart-form",
+              "data": [
+                {
+                  "name": "file",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "labels",
+                  "type": "text",
+                  "value": ""
+                },
+                {
+                  "name": "publicUrl",
+                  "type": "text",
+                  "value": ""
+                }
+              ]
+            }
+          },
+          "docs": "Upload a file to the library"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

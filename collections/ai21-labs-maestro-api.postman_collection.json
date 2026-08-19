@@ -1,0 +1,224 @@
+{
+  "item": [
+    {
+      "id": "4a293333-9d56-4a80-9f00-2d1544b258a0",
+      "name": "Maestro",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "b7f63dc8-309a-4061-86af-04b44b35b7b1",
+          "name": "Create a Maestro run",
+          "request": {
+            "name": "Create a Maestro run",
+            "description": {},
+            "url": {
+              "path": [
+                "studio",
+                "v1",
+                "maestro",
+                "runs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"input\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"requirements\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"tools\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"models\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"budget\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"response_language\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "bca5ceee-77d4-4a35-a44e-70c7676b0187",
+              "name": "Run created",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studio",
+                    "v1",
+                    "maestro",
+                    "runs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"input\": \"<string>\",\n  \"system_prompt\": \"<string>\",\n  \"requirements\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"tools\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"models\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"budget\": \"<string>\",\n  \"include\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"response_language\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e766fa22-69de-4b2d-9317-b02bf685ec5d",
+          "name": "Retrieve a Maestro run by ID",
+          "request": {
+            "name": "Retrieve a Maestro run by ID",
+            "description": {},
+            "url": {
+              "path": [
+                "studio",
+                "v1",
+                "maestro",
+                "runs",
+                ":run_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "run_id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "97361d49-f425-4095-ba3c-89ad2acce838",
+              "name": "Run object with status (completed, failed, in_progress)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studio",
+                    "v1",
+                    "maestro",
+                    "runs",
+                    ":run_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "run_id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ai21.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b040b539-9aae-4a33-9231-a2b62975be03",
+    "name": "AI21 Studio Chat Maestro API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for AI21 Labs covering Jamba chat completions, AI21 Maestro planning runs, and the managed File Library for RAG workflows. Authentication is Bearer token via the Authorization header.\n\nContact Support:\n Name: AI21 Labs",
+      "type": "text/plain"
+    }
+  }
+}

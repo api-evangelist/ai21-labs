@@ -1,0 +1,60 @@
+# AI21 Labs
+
+## Docs
+
+- [AI21 Labs Documentation](https://docs.ai21.com/home.md)
+- [Overview](https://docs.ai21.com/docs/overview.md)
+- [Create an API key](https://docs.ai21.com/docs/create-api-key.md)
+- [SDK](https://docs.ai21.com/docs/sdk.md): AI21 offers Python and TypeScript libraries that simplify the process of using our LLMs' API.
+- [Overview](https://docs.ai21.com/docs/maestro-overview.md)
+- [RAG Overview](https://docs.ai21.com/docs/maestro-rag-overview.md)
+- [RAG Quick Start](https://docs.ai21.com/docs/maestro-rag-quickstart.md)
+- [RAG Use Cases](https://docs.ai21.com/docs/maestro-rag-use-cases.md): Practical use cases where RAG enhances accuracy and relevance.
+- [Overview](https://docs.ai21.com/docs/user-provided-tools-overview.md)
+- [MCP Overview](https://docs.ai21.com/docs/user-provided-tools-mcp.md)
+- [MCP Server Setup](https://docs.ai21.com/docs/mcp-server-setup-guide.md)
+- [HTTP tools](https://docs.ai21.com/docs/user-provided-tools-http.md): Description of your new file.
+- [Quick Start](https://docs.ai21.com/docs/instruction-following-module.md): This guide focuses on AI21 Maestro's Validated Output.
+- [Walkthrough Guide ](https://docs.ai21.com/docs/walkthrough-guide.md): A comprehensive guide to AI21 Maestro’s Validated Output capabilities.
+- [Use Cases](https://docs.ai21.com/docs/use-cases-validated-output.md): Practical applications where the Validated Output delivers significant value.
+- [Jamba](https://docs.ai21.com/docs/jamba-foundation-models.md): Introducing the Jamba Family of Open Models.
+- [Model Availability by Platform](https://docs.ai21.com/docs/model-availability-across-platforms.md)
+- [Prompt Engineering for Jamba Models](https://docs.ai21.com/docs/prompt-engineering.md)
+- [Function Calling](https://docs.ai21.com/docs/function-calling.md): Learn how to extend Jamba's capabilities by giving it access to custom functions and external tools
+- [Batch API](https://docs.ai21.com/docs/jamba-batch-api.md)
+- [vLLM](https://docs.ai21.com/docs/vllm.md): Deploy AI21's Jamba models using vLLM in your own environment. vLLM is an open-source library for high-throughput LLM inference and serving.
+- [Cloud Platform Deployment](https://docs.ai21.com/docs/cloud-platform-deployment.md): Deploy AI21's Jamba models on managed cloud services for production workloads
+- [Troubleshooting & Performance Optimization](https://docs.ai21.com/docs/troubleshooting-performance.md): Resolve common issues and optimize performance for AI21's Jamba model deployments
+- [Local Inference](https://docs.ai21.com/docs/local-inference.md)
+- [File Library](https://docs.ai21.com/docs/file-library-studio.md): How to Use File Library in AI21 Studio
+- [Data Connectors](https://docs.ai21.com/docs/using-data-connectors.md): How to Use Data Connectors in AI21 Studio
+- [File Search](https://docs.ai21.com/docs/file-search-studio-guide.md): How to Use File Search in AI21 Studio
+- [Web Search](https://docs.ai21.com/docs/web-search-studio-guide.md): How to Use Web Search in AI21 Studio
+- [ MCP](https://docs.ai21.com/docs/mcp-studio-guide.md): How to Use MCP in AI21 Studio
+- [HTTP Tools](https://docs.ai21.com/docs/http-studio-guide.md): How to Use HTTP Tools in AI21 Studio
+- [Fine-tuning](https://docs.ai21.com/docs/fine-tuning.md): Fine-tuning is the process of adapting a pre-trained model to perform better on specific tasks by training it on domain-specific data. Learn how to fine-tune Jamba models using different approaches including full fine-tuning, LoRA, and QLoRA
+- [Quantization](https://docs.ai21.com/docs/quantization.md): Quantization reduces model memory usage by representing weights with lower precision. Learn how to use quantization techniques with Jamba models for efficient inference and training.
+- [Tokenization](https://docs.ai21.com/docs/tokenization.md): Tokenization is the process of converting text into numerical tokens that language models can understand. Learn how to use AI21's tokenizer for Jamba models with practical examples.
+- [Account](https://docs.ai21.com/docs/managing-your-account.md)
+- [Pricing](https://docs.ai21.com/docs/usage-cost.md)
+- [Responsible Use](https://docs.ai21.com/docs/responsible-use-1.md)
+- [Safety Research](https://docs.ai21.com/docs/safety-research-1.md)
+- [Training Data](https://docs.ai21.com/docs/training-data-1.md)
+- [Community](https://docs.ai21.com/community.md)
+- [Blog](https://docs.ai21.com/blog.md)
+- [Introduction](https://docs.ai21.com/reference/introduction.md)
+- [Authentication](https://docs.ai21.com/reference/authentication.md)
+- [Rate Limits](https://docs.ai21.com/reference/api-rate-limits.md)
+- [Create run](https://docs.ai21.com/reference/maestro-create-run.md)
+- [Retrieve run status](https://docs.ai21.com/reference/retrieve-run.md): Retrieves the status of the run execution based on its ID. The status can be `completed`, `failed`, or `in_progress`.
+- [Run object](https://docs.ai21.com/reference/run-object.md)
+- [ Chat request](https://docs.ai21.com/reference/jamba-1-6-api-ref.md)
+- [Chat response](https://docs.ai21.com/reference/jamba-api-response.md)
+- [File Library](https://docs.ai21.com/reference/manage-library-ref.md)
+- [Upload workspace files](https://docs.ai21.com/reference/manage-library-ref/upload-workspace-files.md): Upload files to use.
+- [List library files](https://docs.ai21.com/reference/manage-library-ref/list-library-files.md): Retrieve a list of documents in the user's library.  You can optionally specify a filter to return only files with matching labels.
+- [Get workspace file](https://docs.ai21.com/reference/manage-library-ref/get-workspace-files.md): Retrieve metadata about a specific file.
+- [Get file download link](https://docs.ai21.com/reference/manage-library-ref/get-file-download-link.md): Retrieve a signed URL you can use to download a file’s contents from your workspace library.
+- [Update file](https://docs.ai21.com/reference/manage-library-ref/update-file.md): Update the specified parameters of a specific document in the user's library. This operation currently supports updating the publicUrl and labels parameters.
+- [Delete file](https://docs.ai21.com/reference/manage-library-ref/delete-file.md): Delete the specified file from the library.
+- [Changelog](https://docs.ai21.com/changelog.md)

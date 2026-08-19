@@ -1,0 +1,135 @@
+{
+  "item": [
+    {
+      "id": "e9451cb7-9286-44dc-88d5-17d970e59076",
+      "name": "Chat",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "12c05239-21b0-496f-bbf7-db0728275b60",
+          "name": "Create a chat completion with a Jamba model",
+          "request": {
+            "name": "Create a chat completion with a Jamba model",
+            "description": {},
+            "url": {
+              "path": [
+                "studio",
+                "v1",
+                "chat",
+                "completions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\",\n  \"temperature\": 0.4,\n  \"top_p\": 1,\n  \"tools\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"documents\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"response_format\": \"<object>\",\n  \"stop\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"n\": 1,\n  \"stream\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ee060097-6a6c-44a4-ba6d-fe0bc8da6dec",
+              "name": "Completion response",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "studio",
+                    "v1",
+                    "chat",
+                    "completions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"model\": \"<string>\",\n  \"messages\": [\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    },\n    {\n      \"role\": \"<string>\",\n      \"content\": \"<string>\"\n    }\n  ],\n  \"max_tokens\": \"<integer>\",\n  \"temperature\": 0.4,\n  \"top_p\": 1,\n  \"tools\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"documents\": [\n    \"<object>\",\n    \"<object>\"\n  ],\n  \"response_format\": \"<object>\",\n  \"stop\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"n\": 1,\n  \"stream\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.ai21.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "855ee51a-9599-402d-ae84-9ca5595345ed",
+    "name": "AI21 Studio Chat API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "REST API for AI21 Labs covering Jamba chat completions, AI21 Maestro planning runs, and the managed File Library for RAG workflows. Authentication is Bearer token via the Authorization header.\n\nContact Support:\n Name: AI21 Labs",
+      "type": "text/plain"
+    }
+  }
+}
