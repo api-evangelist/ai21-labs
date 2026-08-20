@@ -26,6 +26,18 @@ position: Provider
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ai21-labs.png
 tags:
+- Artificial Intelligence
+- Foundation Models
+- LLM
+- Jamba
+- Mamba
+- RAG
+- Agents
+- Maestro
+- Inference
+- Enterprise AI
+- Fine-Tuning
+tags_raw:
 - AI
 - Foundation Models
 - LLM
@@ -87,6 +99,11 @@ apis:
   humanURL: https://docs.ai21.com/reference
   baseURL: https://api.ai21.com/studio/v1
   tags:
+  - File
+  - RAG
+  - Library
+  - Documents
+  tags_raw:
   - Files
   - RAG
   - Library
