@@ -9,6 +9,20 @@ description: AI21 Labs is an enterprise foundation-model company best known for 
   API with sync and async clients and integrate natively into LangChain and LlamaIndex.
   Jamba weights are also published on Hugging Face for self-hosted vLLM deployment.
 type: Index
+deliveryModel:
+  model: open-core
+  license: Apache-2.0
+  open_source: true
+  commercial: true
+  callable_host: true
+  label: Open core · an OSS project plus a commercial hosted product
+  confidence: high
+  source:
+  - license
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: free
   onboarding: self-serve
