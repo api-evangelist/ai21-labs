@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: AI21 Studio Chat Maestro API
+  title: AI21 Studio Maestro API
   version: 1.0.0
   description: REST API for AI21 Labs covering Jamba chat completions, AI21 Maestro planning runs, and the managed File Library for RAG workflows. Authentication is Bearer token via the Authorization header.
   contact:
@@ -61,6 +61,8 @@ paths:
       responses:
         '200':
           description: Run created
+      operationId: postStudioV1MaestroRuns
+      x-operation-id-source: derived
   /studio/v1/maestro/runs/{run_id}:
     get:
       tags:
@@ -75,6 +77,8 @@ paths:
       responses:
         '200':
           description: Run object with status (completed, failed, in_progress)
+      operationId: getStudioV1MaestroRunsByRunId
+      x-operation-id-source: derived
 components:
   securitySchemes:
     BearerAuth:
