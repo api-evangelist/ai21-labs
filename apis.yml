@@ -92,8 +92,6 @@ apis:
   - type: AsyncAPI
     url: >-
       https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/asyncapi/ai21-labs-asyncapi.yml
-  - url: graphql/ai21-labs-graphql.md
-    type: GraphQL
 - aid: ai21-labs:maestro
   name: AI21 Maestro API
   description: >-
