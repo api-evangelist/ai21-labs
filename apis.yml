@@ -202,16 +202,6 @@ apis:
   properties:
   - type: Repository
     url: https://huggingface.co/ai21labs
-- aid: ai21-labs:ai21-labs-chat-api
-  name: AI21 Labs Chat API
-  description: The Chat API from AI21 Labs — 1 operation(s) for chat.
-  humanURL: https://docs.ai21.com/reference
-  baseURL: https://api.ai21.com/studio/v1
-  tags:
-  - Chat
-  properties:
-  - type: OpenAPI
-    url: openapi/ai21-labs-chat-api-openapi.yml
 - aid: ai21-labs:ai21-labs-library-api
   name: AI21 Labs Library API
   description: The Library API from AI21 Labs — 1 operation(s) for library.
@@ -232,6 +222,16 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/ai21-labs-maestro-api-openapi.yml
+- aid: ai21-labs:ai21-labs-chat-completions-api
+  name: AI21 Labs Chat Completions API
+  description: The Chat Completions API from AI21 Labs — 1 operation(s) for chat completions.
+  humanURL: https://docs.ai21.com/reference
+  baseURL: https://api.ai21.com/studio/v1
+  tags:
+  - Chat Completions
+  properties:
+  - type: OpenAPI
+    url: openapi/ai21-labs-chat-completions-api-openapi.yml
 common:
 - type: CapabilityMap
   url: capabilities/ai21-labs-capability-edges.yml

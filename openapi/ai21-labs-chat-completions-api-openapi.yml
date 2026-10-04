@@ -12,12 +12,12 @@ servers:
 security:
 - BearerAuth: []
 tags:
-- name: Chat
+- name: Chat Completions
 paths:
   /studio/v1/chat/completions:
     post:
       tags:
-      - Chat
+      - Chat Completions
       summary: Create a chat completion with a Jamba model
       requestBody:
         required: true
