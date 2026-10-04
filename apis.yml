@@ -233,6 +233,9 @@ apis:
   - type: OpenAPI
     url: openapi/ai21-labs-maestro-api-openapi.yml
 common:
+- type: CapabilityMap
+  url: capabilities/ai21-labs-capability-edges.yml
+  name: AI21 Labs Business Capability Map
 - type: IssueTracker
   url: https://github.com/AI21Labs/ai21-python/issues
 - type: Releases
