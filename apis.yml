@@ -233,6 +233,10 @@ apis:
   - type: OpenAPI
     url: openapi/ai21-labs-chat-completions-api-openapi.yml
 common:
+- type: RateLimits
+  url: rate-limits/ai21-labs-rate-limits.yml
+- type: FinOps
+  url: finops/ai21-labs-finops.yml
 - type: Plans
   url: plans/ai21-labs-plans-pricing.yml
 - type: CapabilityMap
