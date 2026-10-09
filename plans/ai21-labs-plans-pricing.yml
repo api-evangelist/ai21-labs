@@ -1,56 +1,128 @@
-specification: API Commons Plans
-specificationVersion: '0.1'
-schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
-provider: AI21 Labs
-providerId: ai21-labs
-created: '2026-05-22'
-modified: '2026-05-22'
-tags:
-- AI
-- Foundation Models
-- LLM
-- Jamba
-- Mamba
-- RAG
-- Agents
-- Maestro
-- Inference
-- Enterprise AI
-- Fine-Tuning
-description: Machine-readable plans scaffold for the AI21 Labs API surface. Conforms to the API Commons Plans schema. Tier
-  limits and prices are scaffold defaults; replace with provider-published values.
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://www.ai21.com/pricing/
+sources:
+- https://www.ai21.com/pricing/
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: per-call
+delivery:
+  delivery: managed+licensed
+  method: page
+  read: '2026-10-07'
+  evidence: Private cloud hosting
+  managed_tier: Pay As You Go
+published: true
+note: Token-based foundation model pricing plus free trial and negotiated custom plan.
+plan_count: 7
+currency: USD
 plans:
-- id: ai21-labs-free
-  name: Free
-  type: freemium
-  description: Free entry tier for the AI21 Labs API surface. Intended for evaluation, prototyping, and low-volume integrations.
-    Real limits and pricing must be reconciled with the provider's published plan documentation.
-  entries:
-  - label: API Requests
-    description: Monthly API request quota across all included endpoints
-    name: api_requests
-    type: quota
-    metric: requests
-    limit: 1000
-    timeFrame: month
-    geo: global
-    domains:
-    - https://api.ai21.com/studio/v1
-    unit: 1
-    price: '0.00'
-    userMultiplied: false
-  - label: Rate Limit
-    description: Maximum requests per minute on the free tier
-    name: rate_limit
-    type: rate
-    metric: requests_per_minute
-    limit: 10
-    timeFrame: minute
-    geo: global
-    domains:
-    - https://api.ai21.com/studio/v1
-    unit: 1
-    price: '0.00'
-references:
-- name: AI21 Labs API Documentation
-  url: https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/apis.yml
+- name: Pay As You Go
+  price_text: Usage-based pricing
+  period: per-use
+  included_quota: Foundation model APIs & SDK, Unlimited seats
+- name: Free Trial
+  price_text: $10 credits for 7 days. No credit card needed
+  price: 10
+  currency: USD
+  period: one-time
+  unit: credits
+  included_quota: $10 credits for 7 days
+- name: Custom Plan
+  price_text: Contact Sales
+  period: none
+  included_quota: Everything in the Pay As You Go Plan, Volume discounts, Premium API rate limits, Private
+    cloud hosting, Priority support, Dedicated account manager, Expert AI consultancy
+- name: Jamba Mini (input)
+  price_text: $0.2 / 1M input tokens
+  price: 0.2
+  currency: USD
+  period: per-use
+  unit: 1M input tokens
+- name: Jamba Mini (output)
+  price_text: $0.4 / 1M output tokens
+  price: 0.4
+  currency: USD
+  period: per-use
+  unit: 1M output tokens
+- name: Jamba Large (input)
+  price_text: $2 / 1M input tokens
+  price: 2
+  currency: USD
+  period: per-use
+  unit: 1M input tokens
+- name: Jamba Large (output)
+  price_text: $8 / 1M output tokens
+  price: 8
+  currency: USD
+  period: per-use
+  unit: 1M output tokens
+rate_limit_statements:
+- Premium API rate limits
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - hybrid
+  units:
+  - credit
+  - token
+  plans:
+  - name: Pay As You Go
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - other
+  - name: Free Trial
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - credit
+    periods:
+    - one-time
+  - name: Custom Plan
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods:
+    - none
+  - name: Jamba Mini (input)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - token
+    periods:
+    - other
+  - name: Jamba Mini (output)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - token
+    periods:
+    - other
+  - name: Jamba Large (input)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - token
+    periods:
+    - other
+  - name: Jamba Large (output)
+    access: other
+    model: hybrid
+    model_how: derived
+    units:
+    - token
+    periods:
+    - other
