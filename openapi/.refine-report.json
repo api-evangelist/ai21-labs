@@ -1,27 +1,47 @@
 {
   "provider": "ai21-labs",
   "sources": [
-    "_original/ai21-labs-openapi.yml"
+    "_original/ai21-labs-openapi.json"
   ],
   "outputs": [
-    "ai21-labs-chat-api-openapi.yml",
-    "ai21-labs-library-api-openapi.yml",
-    "ai21-labs-maestro-api-openapi.yml"
+    "ai21-labs-agents-api-openapi.yml",
+    "ai21-labs-auth-api-openapi.yml",
+    "ai21-labs-blogs-api-openapi.yml",
+    "ai21-labs-buckets-api-openapi.yml",
+    "ai21-labs-collections-api-openapi.yml",
+    "ai21-labs-containers-api-openapi.yml",
+    "ai21-labs-datasets-api-openapi.yml",
+    "ai21-labs-discussions-api-openapi.yml",
+    "ai21-labs-docs-api-openapi.yml",
+    "ai21-labs-inference-endpoints-api-openapi.yml",
+    "ai21-labs-inference-providers-api-openapi.yml",
+    "ai21-labs-jobs-api-openapi.yml",
+    "ai21-labs-kernels-api-openapi.yml",
+    "ai21-labs-models-api-openapi.yml",
+    "ai21-labs-notifications-api-openapi.yml",
+    "ai21-labs-oauth-api-openapi.yml",
+    "ai21-labs-orgs-api-openapi.yml",
+    "ai21-labs-papers-api-openapi.yml",
+    "ai21-labs-repo-search-api-openapi.yml",
+    "ai21-labs-repos-api-openapi.yml",
+    "ai21-labs-resource-groups-api-openapi.yml",
+    "ai21-labs-scim-api-openapi.yml",
+    "ai21-labs-service-accounts-api-openapi.yml",
+    "ai21-labs-spaces-api-openapi.yml",
+    "ai21-labs-sql-console-api-openapi.yml",
+    "ai21-labs-tokens-api-openapi.yml",
+    "ai21-labs-users-api-openapi.yml",
+    "ai21-labs-webhooks-api-openapi.yml"
   ],
-  "archived": [
-    "deleted 1 superseded output(s) from the previous generation"
-  ],
+  "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "ai21-labs-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "superseded outputs removed: ai21-labs-chat-completions-api-openapi.yml",
-    "apis.yml register: written (+1 apis, 11 total)"
+    "ai21-labs-openapi.json: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "ai21-labs-openapi.json: declared missing tag: blogs",
+    "ai21-labs-openapi.json: declared missing tag: tokens",
+    "apis.yml register: written (+28 apis, 36 total)"
   ],
-  "skipped": [
-    "ai21-labs-chat-completions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "ai21-labs-library-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "ai21-labs-maestro-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }
