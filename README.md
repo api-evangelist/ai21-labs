@@ -1,4 +1,4 @@
-# AI21 Labs (ai21-labs)
+# AI21 Labs
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,208 +66,163 @@
 
 AI21 Labs is an enterprise foundation-model company best known for the Jamba family of open-weight hybrid Mamba/Transformer models and AI21 Maestro, a dynamic planning system that orchestrates tools, retrieval, and validated output during inference. The platform exposes a Bearer-token REST API at api.ai21.com covering chat completions, conversational RAG over a managed file library, batch processing, fine-tuning, and function calling. Official Python and TypeScript SDKs wrap the API with sync and async clients and integrate natively into LangChain and LlamaIndex. Jamba weights are also published on Hugging Face for self-hosted vLLM deployment.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/apis.yml)
+**Areas:** Artificial Intelligence · Foundation Models · LLM · Jamba · Mamba · RAG · Agents · Maestro · Inference · Enterprise AI · Fine-Tuning
 
-## Scope
+## AI21 Labs on APIs.io
 
-- **Type:** Index
-- **Position:** Provider
-- **Access:** 3rd-Party
+Everything profiled for AI21 Labs is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ai21-labs/](https://apis.io/providers/ai21-labs/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (11)
 
-- AI
-- Foundation Models
-- LLM
-- Jamba
-- Mamba
-- RAG
-- Agents
-- Maestro
-- Inference
-- Enterprise AI
-- Fine-Tuning
+- [AI21 Jamba Chat Completions API](https://apis.io/apis/ai21-labs/chat-completions/) — Conversational completions endpoint backed by the Jamba family of hybrid Mamba/Transformer models (Jamba 1.5 Mini, Jamba 1.5 Large, Jamba 1.6). Accepts a…
+- [AI21 Maestro API](https://apis.io/apis/ai21-labs/maestro/) — Dynamic planning system that, at inference time, determines the optimal sequence of actions to solve a task. Exposes run creation and retrieval endpoints,…
+- [AI21 File Library API](https://apis.io/apis/ai21-labs/library/) — Managed file storage for RAG workflows. Upload, list, retrieve, update, and delete documents that Maestro and Jamba endpoints can ground on at inference time.
+- [AI21 Batch API](https://apis.io/apis/ai21-labs/batch/) — Asynchronous batch processing for large volumes of Jamba completions. Submit a batch job, poll for status, and download results when the run completes.
+- [AI21 Fine-Tuning API](https://apis.io/apis/ai21-labs/fine-tuning/) — Fine-tuning service for Jamba models supporting full, LoRA, and QLoRA strategies. Create training jobs from uploaded datasets and deploy the resulting model…
+- [AI21 Python SDK](https://apis.io/apis/ai21-labs/python-sdk/) — Official Python SDK (ai21 on PyPI) wrapping the AI21 Studio REST API with sync and async clients, streaming support, LangChain / LlamaIndex integrations,…
+- [AI21 TypeScript / JavaScript SDK](https://apis.io/apis/ai21-labs/typescript-sdk/) — Official TypeScript and JavaScript client for the AI21 Studio API, with typed request and response models and streaming helpers for browser and Node.js…
+- [AI21 Jamba on Hugging Face](https://apis.io/apis/ai21-labs/huggingface/) — Open-weight releases of the Jamba family on Hugging Face for self-hosted inference via vLLM, Transformers, and other runtimes.
+- [AI21 Labs Library API](https://apis.io/apis/ai21-labs/ai21-labs-library-api/) — The Library API from AI21 Labs — 1 operation(s) for library.
+- [AI21 Labs Maestro API](https://apis.io/apis/ai21-labs/ai21-labs-maestro-api/) — The Maestro API from AI21 Labs — 2 operation(s) for maestro.
+- [AI21 Labs Chat Completions API](https://apis.io/apis/ai21-labs/ai21-labs-chat-completions-api/) — The Chat Completions API from AI21 Labs — 1 operation(s) for chat completions.
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-05-23
-- **Modified:** 2026-05-29
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### AsyncAPI (1)
 
-### AI21 Jamba Chat Completions API
+Event-driven and webhook contracts.
 
-Conversational completions endpoint backed by the Jamba family of hybrid Mamba/Transformer models (Jamba 1.5 Mini, Jamba 1.5 Large, Jamba 1.6). Accepts a message array, system prompts, temperature, max tokens, tools, and streaming, returning assistant messages with usage metadata.
+- [AI21 Studio Streaming API](https://apis.io/asyncapis/ai21-labs/ai21-labs-asyncapi/)
 
-- **Human URL:** [https://docs.ai21.com/reference](https://docs.ai21.com/reference)
-- **Base URL:** `https://api.ai21.com/studio/v1`
+#### Event channels (1)
 
-#### Tags
+Individual events and webhooks the provider emits.
 
-- Chat
-- Completions
-- Jamba
-- LLM
+- [chat/completions](https://apis.io/channels/ai21-labs/chat-completions/)
 
-#### Properties
+#### GraphQL (1)
 
-- [Documentation](https://docs.ai21.com/reference)
-- [AsyncAPI](https://raw.githubusercontent.com/api-evangelist/ai21-labs/refs/heads/main/asyncapi/ai21-labs-asyncapi.yml) — [AsyncAPI Specification](https://www.asyncapi.com/docs/reference/specification/latest)
-- [Postman Collection](collections/ai21-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ai21-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+GraphQL schemas.
 
-### AI21 Maestro API
+- [Moved to /providers/ai21-labs/](https://apis.io/graphqls/ai21-labs/ai21-labs-graphql/)
 
-Dynamic planning system that, at inference time, determines the optimal sequence of actions to solve a task. Exposes run creation and retrieval endpoints, supports validated output for strict instruction following, and orchestrates RAG, web search, file libraries, MCP tools, and custom HTTP tools.
+#### MCP servers (1)
 
-- **Human URL:** [https://docs.ai21.com/docs/maestro](https://docs.ai21.com/docs/maestro)
-- **Base URL:** `https://api.ai21.com/studio/v1`
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags
+- [ai21-labs](https://apis.io/servers/ai21-labs/ai21-labs/)
 
-- Maestro
-- Planning
-- Agents
-- Validated Output
+#### Agentic access (1)
 
-#### Properties
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- [Documentation](https://docs.ai21.com/docs/maestro)
-- [Postman Collection](collections/ai21-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ai21-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+- [Ai21 Labs Agentic Access](https://apis.io/agentic-access/ai21-labs/ai21-labs-agentic-access/)
 
-### AI21 File Library API
+#### Collections (4)
 
-Managed file storage for RAG workflows. Upload, list, retrieve, update, and delete documents that Maestro and Jamba endpoints can ground on at inference time.
+Postman and Open Collection request collections.
 
-- **Human URL:** [https://docs.ai21.com/reference](https://docs.ai21.com/reference)
-- **Base URL:** `https://api.ai21.com/studio/v1`
+- [AI21 Studio API](https://apis.io/collections/ai21-labs/open-ai21-labs/)
+- [AI21 Studio Chat API](https://apis.io/collections/ai21-labs/open-ai21-labs-chat-api/)
+- [AI21 Studio Chat Library API](https://apis.io/collections/ai21-labs/open-ai21-labs-library-api/)
+- [AI21 Studio Chat Maestro API](https://apis.io/collections/ai21-labs/open-ai21-labs-maestro-api/)
 
-#### Tags
+#### Governance rules (1)
 
-- Files
-- RAG
-- Library
-- Documents
+Spectral rulesets for the provider's contracts.
 
-#### Properties
+- [AI21 Labs — asyncapi rules](https://apis.io/rules/ai21-labs/ai21-labs-asyncapi-spectral-rules/)
 
-- [Documentation](https://docs.ai21.com/reference)
-- [Postman Collection](collections/ai21-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ai21-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+#### Security (2)
 
-### AI21 Batch API
+Authentication, trust centre, and vulnerability disclosure.
 
-Asynchronous batch processing for large volumes of Jamba completions. Submit a batch job, poll for status, and download results when the run completes.
+- [Ai21 Labs Authentication](https://apis.io/security/ai21-labs/ai21-labs-authentication/)
+- [Ai21 Labs Domain Security](https://apis.io/security/ai21-labs/ai21-labs-domain-security/)
 
-- **Human URL:** [https://docs.ai21.com/reference](https://docs.ai21.com/reference)
-- **Base URL:** `https://api.ai21.com/studio/v1`
+#### Plans and pricing (1)
 
-#### Tags
+Published plans, tiers and prices.
 
-- Batch
-- Async
-- Inference
+- [Ai21 Labs Plans Pricing](https://apis.io/plans/ai21-labs/ai21-labs-plans-pricing/)
 
-#### Properties
+#### Rate limits (1)
 
-- [Documentation](https://docs.ai21.com/reference)
-- [Postman Collection](collections/ai21-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ai21-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+Published request limits.
 
-### AI21 Fine-Tuning API
+- [Ai21 Labs Rate Limits](https://apis.io/rate-limits/ai21-labs/ai21-labs-rate-limits/)
 
-Fine-tuning service for Jamba models supporting full, LoRA, and QLoRA strategies. Create training jobs from uploaded datasets and deploy the resulting model variants behind the standard chat completions endpoint.
+#### FinOps (1)
 
-- **Human URL:** [https://docs.ai21.com/docs/fine-tuning](https://docs.ai21.com/docs/fine-tuning)
-- **Base URL:** `https://api.ai21.com/studio/v1`
+What the API costs to run, by operation.
 
-#### Tags
+- [Ai21 Labs Finops](https://apis.io/finops/ai21-labs/ai21-labs-finops/)
 
-- Fine-Tuning
-- LoRA
-- QLoRA
-- Training
+## Where to find this API
 
-#### Properties
-
-- [Documentation](https://docs.ai21.com/docs/fine-tuning)
-- [Postman Collection](collections/ai21-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ai21-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### AI21 Python SDK
-
-Official Python SDK (ai21 on PyPI) wrapping the AI21 Studio REST API with sync and async clients, streaming support, LangChain / LlamaIndex integrations, and helpers for chat, Maestro, library, and batch.
-
-- **Human URL:** [https://github.com/AI21Labs/ai21-python](https://github.com/AI21Labs/ai21-python)
-- **Base URL:** `https://github.com/AI21Labs/ai21-python`
-
-#### Tags
-
-- SDK
-- Python
-- PyPI
-
-#### Properties
-
-- [Repository](https://github.com/AI21Labs/ai21-python)
-- [Postman Collection](collections/ai21-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ai21-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### AI21 TypeScript / JavaScript SDK
-
-Official TypeScript and JavaScript client for the AI21 Studio API, with typed request and response models and streaming helpers for browser and Node.js runtimes.
-
-- **Human URL:** [https://github.com/AI21Labs/ai21-typescript](https://github.com/AI21Labs/ai21-typescript)
-- **Base URL:** `https://github.com/AI21Labs/ai21-typescript`
-
-#### Tags
-
-- SDK
-- TypeScript
-- JavaScript
-
-#### Properties
-
-- [Repository](https://github.com/AI21Labs)
-- [Postman Collection](collections/ai21-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ai21-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-### AI21 Jamba on Hugging Face
-
-Open-weight releases of the Jamba family on Hugging Face for self-hosted inference via vLLM, Transformers, and other runtimes.
-
-- **Human URL:** [https://huggingface.co/ai21labs](https://huggingface.co/ai21labs)
-- **Base URL:** `https://huggingface.co/ai21labs`
-
-#### Tags
-
-- Hugging Face
-- Open Weights
-- Jamba
-- Self-Hosted
-
-#### Properties
-
-- [Repository](https://huggingface.co/ai21labs)
-- [Postman Collection](collections/ai21-labs.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/ai21-labs.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
-
-## Common Properties
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
 
 - [Website](https://www.ai21.com/)
 - [Documentation](https://docs.ai21.com/)
-- [API Reference](https://docs.ai21.com/reference)
-- [GitHub Organization](https://github.com/AI21Labs)
-- [Hugging Face](https://huggingface.co/ai21labs)
-- [Blog](https://www.ai21.com/blog/)
+- [API reference](https://docs.ai21.com/reference)
 - [Pricing](https://www.ai21.com/pricing/)
 - [Changelog](https://docs.ai21.com/changelog)
-- [LinkedIn](https://www.linkedin.com/company/ai21/)
-- [X (Twitter)](https://x.com/AI21Labs)
-- [L L Ms Txt](https://docs.ai21.com/llms.txt)
+- [Blog](https://www.ai21.com/blog/)
+- [GitHub](https://github.com/AI21Labs)
 
-## Maintainers
+## API Evangelist rating
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+**Kin Score 39.7** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 75.0 |
+| Contract quality | 55.7 |
+| Contract governance | 11.4 |
+| Operational transparency | 23.7 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 42.1 |
+
+**Agent readiness 29.1** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | verified |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | derived (partial credit) |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | na |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 10.9** — AI & Biometrics
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ai21-labs/](https://apis.io/providers/ai21-labs/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for AI21 Labs: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ai21-labs/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
